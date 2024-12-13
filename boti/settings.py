@@ -98,8 +98,12 @@ WSGI_APPLICATION = 'boti.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Botilleria',
+        'USER': 'Admin',
+        'PASSWORD': 'root1234',
+        'HOST': 'localhost',
+        'PORT': '3306',  # Puerto predeterminado de MySQL
     }
 }
 
@@ -149,3 +153,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
                       #Configuran el manejo de archivos multimedia subidos por usuarios.
 MEDIA_URL='/media/'  # esto hace referencia al espacio que se usara en la ur, el noticia/media
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
+
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
