@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Editar Usuario</h1>
+
+    <form method="post" class="w-50 mx-auto">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ form.username.id_for_label }}" class="form-label">Nombre de Usuario</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.email.id_for_label }}" class="form-label">Correo Electrónico</label>
+            {{ form.email }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.role.id_for_label }}" class="form-label">Rol</label>
+            {{ form.role }}  <!-- El campo de selección se renderiza correctamente -->
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.password1.id_for_label }}" class="form-label">Nueva Contraseña (opcional)</label>
+            {{ form.password1 }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.password2.id_for_label }}" class="form-label">Confirmar Contraseña</label>
+            {{ form.password2 }}
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+    </form>
+
+    <a href="{% url 'user_list' %}" class="btn btn-link mt-4 d-block text-center">Volver a la lista de usuarios</a>
+{% endblock %}

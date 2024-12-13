@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">Formulario de Contacto</h2>
+
+    <!-- Mostrar mensajes de éxito o error -->
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            ¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.
+        </div>
+        <a href="{% url 'vendedor_dashboard' %}" class="btn btn-success mt-3">Ir al Panel del Vendedor</a>
+    {% else %}
+        <!-- Formulario de contacto -->
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                {{ form.name }}
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                {{ form.email }}
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Mensaje</label>
+                {{ form.message }}
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Enviar</button>
+        </form>
+    {% endif %}
+</div>
+
+<script>
+    // Script para desactivar el botón tras el envío
+    document.querySelector("form").addEventListener("submit", function(event) {
+        const submitBtn = document.getElementById("submit-btn");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Enviando...";
+    });
+</script>
+{% endblock %}

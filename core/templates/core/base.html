@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mainstock</title>
+        <link rel="icon" type="image/x-icon" href="{% static 'usuarios/favicon.ico' %}" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <link href="{% static 'usuarios/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">Mainstock</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login' %}">login</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5 text-center text-white">
+                <h1 class="display-4 fw-bolder">Mainstock</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Control de usuarios, productos y stock.</p>
+            </div>
+        </header>
+
+        <!-- Main content area -->
+        <div class="container py-5">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row text-center text-md-start">
+            <!-- About Section -->
+            <div class="col-md-4 mb-3">
+                <h5 class="text-uppercase">Acerca de Nosotros</h5>
+                <p>Mainstock ofrece la mejor solución para la gestión de inventarios. Optimiza tus procesos y lleva tu negocio al siguiente nivel.</p>
+            </div>
+
+            <!-- Links Section -->
+            <div class="col-md-4 mb-3">
+                <h5 class="text-uppercase">Enlaces Útiles</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#features" class="text-white text-decoration-none">Características</a></li>
+                    <li><a href="#pricing" class="text-white text-decoration-none">Precios</a></li>
+                    <li><a href="#support" class="text-white text-decoration-none">Soporte</a></li>
+                    <li><a href="#contact" class="text-white text-decoration-none">Contáctanos</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="col-md-4 mb-3">
+                <h5 class="text-uppercase">Contáctanos</h5>
+                <p>Email: <a href="mailto:soporte@stockmaster.com" class="text-white">soporte@mainstock.com</a></p>
+                <p>Teléfono: +123-456-7890</p>
+                <p>Ubicación: Av. Innovación 123, Distrito Tecnológico</p>
+            </div>
+        </div>
+
+        <!-- Copyright Section -->
+        <div class="text-center pt-3 border-top border-light mt-3">
+            <p class="m-0">&copy; Mainstock 2023. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'usuarios/scripts.js' %}"></script>
+    </body>
+</html>
