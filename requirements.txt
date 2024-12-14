@@ -1,9 +1,10 @@
-asgiref @ file:///C:/b/abs_ae1n0p_8_w/croot/asgiref_1724072476516/work
+asgiref==3.8.1
 crispy-bootstrap5==2024.10
-Django @ file:///C:/b/abs_d8jy6px5xv/croot/django_1731616483677/work
+Django==5.1.4
 django-crispy-forms==2.3
 mysqlclient==2.2.6
 pillow==11.0.0
-setuptools==75.1.0
-sqlparse @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/sqlparse_1699544474746/work
-wheel==0.44.0
+setuptools==75.6.0
+sqlparse==0.5.3
+tzdata==2024.2
+wheel==0.45.1
