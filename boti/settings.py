@@ -99,11 +99,11 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Botilleria',
-        'USER': 'Admin',
-        'PASSWORD': 'root1234',
-        'HOST': 'localhost',
-        'PORT': '3306',  # Puerto predeterminado de MySQL
+        'NAME': os.getenv('DB_NAME', 'Botilleria'),
+        'USER': os.getenv('DB_USER', 'Admin'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'root1234'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
