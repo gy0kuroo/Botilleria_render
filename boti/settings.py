@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gbilur8r=7pj8h1khk054+(ibz$qa+uroy=o+=r%&*#29^d^ld
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -64,6 +64,7 @@ DEFAULT_FROM_EMAIL = 'no-reply@tu-dominio.com'  # Este puede ser cualquier corre
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -140,7 +141,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -148,9 +148,12 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-                      #Configuran el manejo de archivos multimedia subidos por usuarios.
+ 
+STATIC_URL = '/static/'                     #Configuran el manejo de archivos multimedia subidos por usuarios.
 MEDIA_URL='/media/'  # esto hace referencia al espacio que se usara en la ur, el noticia/media
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
