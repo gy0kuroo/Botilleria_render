@@ -77,7 +77,7 @@ ROOT_URLCONF = 'boti.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # Directorio donde están las plantillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,9 +89,7 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'boti.wsgi.application'
-
+WSGI_APPLICATION = 'boti.wsgi.app'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
