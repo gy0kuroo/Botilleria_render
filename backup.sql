@@ -1,160 +1,916 @@
-PRAGMA foreign_keys=OFF;
-BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL);
-INSERT INTO django_migrations VALUES(1,'contenttypes','0001_initial','2024-11-21 16:35:04.186185');
-INSERT INTO django_migrations VALUES(2,'contenttypes','0002_remove_content_type_name','2024-11-21 16:35:04.388183');
-INSERT INTO django_migrations VALUES(3,'auth','0001_initial','2024-11-21 16:35:04.841184');
-INSERT INTO django_migrations VALUES(4,'auth','0002_alter_permission_name_max_length','2024-11-21 16:35:05.284184');
-INSERT INTO django_migrations VALUES(5,'auth','0003_alter_user_email_max_length','2024-11-21 16:35:05.636185');
-INSERT INTO django_migrations VALUES(6,'auth','0004_alter_user_username_opts','2024-11-21 16:35:05.842183');
-INSERT INTO django_migrations VALUES(7,'auth','0005_alter_user_last_login_null','2024-11-21 16:35:06.140185');
-INSERT INTO django_migrations VALUES(8,'auth','0006_require_contenttypes_0002','2024-11-21 16:35:06.589184');
-INSERT INTO django_migrations VALUES(9,'auth','0007_alter_validators_add_error_messages','2024-11-21 16:35:06.786184');
-INSERT INTO django_migrations VALUES(10,'auth','0008_alter_user_username_max_length','2024-11-21 16:35:06.984185');
-INSERT INTO django_migrations VALUES(11,'auth','0009_alter_user_last_name_max_length','2024-11-21 16:35:07.183185');
-INSERT INTO django_migrations VALUES(12,'auth','0010_alter_group_name_max_length','2024-11-21 16:35:07.382184');
-INSERT INTO django_migrations VALUES(13,'auth','0011_update_proxy_permissions','2024-11-21 16:35:07.599185');
-INSERT INTO django_migrations VALUES(14,'auth','0012_alter_user_first_name_max_length','2024-11-21 16:35:07.923184');
-INSERT INTO django_migrations VALUES(15,'usuarios','0001_initial','2024-11-21 16:35:08.317184');
-INSERT INTO django_migrations VALUES(16,'admin','0001_initial','2024-11-21 16:50:07.374571');
-INSERT INTO django_migrations VALUES(17,'admin','0002_logentry_remove_auto_add','2024-11-21 16:50:07.386572');
-INSERT INTO django_migrations VALUES(18,'admin','0003_logentry_add_action_flag_choices','2024-11-21 16:50:07.406570');
-INSERT INTO django_migrations VALUES(19,'sessions','0001_initial','2024-11-21 16:50:07.414572');
-INSERT INTO django_migrations VALUES(20,'usuarios','0002_producto','2024-11-28 22:52:52.961719');
-INSERT INTO django_migrations VALUES(21,'crud','0001_initial','2024-11-29 00:04:01.842723');
-INSERT INTO django_migrations VALUES(22,'usuarios','0003_delete_producto','2024-11-29 00:04:14.833721');
-INSERT INTO django_migrations VALUES(23,'usuarios','0004_alter_customuser_role','2024-11-30 22:10:34.410736');
-CREATE TABLE IF NOT EXISTS "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL);
-INSERT INTO django_content_type VALUES(1,'auth','permission');
-INSERT INTO django_content_type VALUES(2,'auth','group');
-INSERT INTO django_content_type VALUES(3,'contenttypes','contenttype');
-INSERT INTO django_content_type VALUES(4,'usuarios','customuser');
-INSERT INTO django_content_type VALUES(5,'admin','logentry');
-INSERT INTO django_content_type VALUES(6,'sessions','session');
-INSERT INTO django_content_type VALUES(7,'usuarios','producto');
-INSERT INTO django_content_type VALUES(8,'crud','producto');
-CREATE TABLE IF NOT EXISTS "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED, "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED);
-CREATE TABLE IF NOT EXISTS "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL);
-INSERT INTO auth_permission VALUES(1,1,'add_permission','Can add permission');
-INSERT INTO auth_permission VALUES(2,1,'change_permission','Can change permission');
-INSERT INTO auth_permission VALUES(3,1,'delete_permission','Can delete permission');
-INSERT INTO auth_permission VALUES(4,1,'view_permission','Can view permission');
-INSERT INTO auth_permission VALUES(5,2,'add_group','Can add group');
-INSERT INTO auth_permission VALUES(6,2,'change_group','Can change group');
-INSERT INTO auth_permission VALUES(7,2,'delete_group','Can delete group');
-INSERT INTO auth_permission VALUES(8,2,'view_group','Can view group');
-INSERT INTO auth_permission VALUES(9,3,'add_contenttype','Can add content type');
-INSERT INTO auth_permission VALUES(10,3,'change_contenttype','Can change content type');
-INSERT INTO auth_permission VALUES(11,3,'delete_contenttype','Can delete content type');
-INSERT INTO auth_permission VALUES(12,3,'view_contenttype','Can view content type');
-INSERT INTO auth_permission VALUES(13,4,'add_customuser','Can add user');
-INSERT INTO auth_permission VALUES(14,4,'change_customuser','Can change user');
-INSERT INTO auth_permission VALUES(15,4,'delete_customuser','Can delete user');
-INSERT INTO auth_permission VALUES(16,4,'view_customuser','Can view user');
-INSERT INTO auth_permission VALUES(17,5,'add_logentry','Can add log entry');
-INSERT INTO auth_permission VALUES(18,5,'change_logentry','Can change log entry');
-INSERT INTO auth_permission VALUES(19,5,'delete_logentry','Can delete log entry');
-INSERT INTO auth_permission VALUES(20,5,'view_logentry','Can view log entry');
-INSERT INTO auth_permission VALUES(21,6,'add_session','Can add session');
-INSERT INTO auth_permission VALUES(22,6,'change_session','Can change session');
-INSERT INTO auth_permission VALUES(23,6,'delete_session','Can delete session');
-INSERT INTO auth_permission VALUES(24,6,'view_session','Can view session');
-INSERT INTO auth_permission VALUES(25,7,'add_producto','Can add producto');
-INSERT INTO auth_permission VALUES(26,7,'change_producto','Can change producto');
-INSERT INTO auth_permission VALUES(27,7,'delete_producto','Can delete producto');
-INSERT INTO auth_permission VALUES(28,7,'view_producto','Can view producto');
-INSERT INTO auth_permission VALUES(29,8,'add_producto','Can add producto');
-INSERT INTO auth_permission VALUES(30,8,'change_producto','Can change producto');
-INSERT INTO auth_permission VALUES(31,8,'delete_producto','Can delete producto');
-INSERT INTO auth_permission VALUES(32,8,'view_producto','Can view producto');
-CREATE TABLE IF NOT EXISTS "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(150) NOT NULL UNIQUE);
-INSERT INTO auth_group VALUES(1,'admin');
-INSERT INTO auth_group VALUES(2,'supervisor');
-INSERT INTO auth_group VALUES(3,'vendedor');
-CREATE TABLE IF NOT EXISTS "usuarios_customuser_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "customuser_id" bigint NOT NULL REFERENCES "usuarios_customuser" ("id") DEFERRABLE INITIALLY DEFERRED, "group_id" integer NOT NULL REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED);
-INSERT INTO usuarios_customuser_groups VALUES(1,3,1);
-INSERT INTO usuarios_customuser_groups VALUES(13,23,3);
-INSERT INTO usuarios_customuser_groups VALUES(14,24,2);
-CREATE TABLE IF NOT EXISTS "usuarios_customuser_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "customuser_id" bigint NOT NULL REFERENCES "usuarios_customuser" ("id") DEFERRABLE INITIALLY DEFERRED, "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED);
-INSERT INTO usuarios_customuser_user_permissions VALUES(1,3,32);
-INSERT INTO usuarios_customuser_user_permissions VALUES(2,3,13);
-INSERT INTO usuarios_customuser_user_permissions VALUES(3,3,14);
-INSERT INTO usuarios_customuser_user_permissions VALUES(4,3,15);
-INSERT INTO usuarios_customuser_user_permissions VALUES(5,3,16);
-INSERT INTO usuarios_customuser_user_permissions VALUES(6,3,25);
-INSERT INTO usuarios_customuser_user_permissions VALUES(7,3,26);
-INSERT INTO usuarios_customuser_user_permissions VALUES(8,3,27);
-INSERT INTO usuarios_customuser_user_permissions VALUES(9,3,28);
-INSERT INTO usuarios_customuser_user_permissions VALUES(10,3,29);
-INSERT INTO usuarios_customuser_user_permissions VALUES(11,3,30);
-INSERT INTO usuarios_customuser_user_permissions VALUES(12,3,31);
-CREATE TABLE IF NOT EXISTS "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL CHECK ("action_flag" >= 0), "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" bigint NOT NULL REFERENCES "usuarios_customuser" ("id") DEFERRABLE INITIALLY DEFERRED, "action_time" datetime NOT NULL);
-INSERT INTO django_admin_log VALUES(1,'1','Yogur',1,'[{"added": {}}]',7,2,'2024-11-28 23:19:55.849718');
-INSERT INTO django_admin_log VALUES(2,'2','pate',1,'[{"added": {}}]',7,2,'2024-11-28 23:25:29.938750');
-INSERT INTO django_admin_log VALUES(3,'1','yogur',1,'[{"added": {}}]',8,2,'2024-11-29 00:10:10.372692');
-INSERT INTO django_admin_log VALUES(4,'2','1',1,'[{"added": {}}]',8,2,'2024-11-29 00:21:39.523728');
-INSERT INTO django_admin_log VALUES(5,'3','2',1,'[{"added": {}}]',8,2,'2024-11-29 00:22:03.716589');
-INSERT INTO django_admin_log VALUES(6,'8','nala',2,'[{"changed": {"fields": ["Staff status", "Superuser status"]}}]',4,2,'2024-11-30 22:25:16.159764');
-INSERT INTO django_admin_log VALUES(7,'3','JuanCarlos',2,'[{"changed": {"fields": ["User permissions"]}}]',4,2,'2024-12-01 00:03:03.025645');
-INSERT INTO django_admin_log VALUES(11,'13','carlos',2,'[{"changed": {"fields": ["Groups"]}}]',4,2,'2024-12-01 16:07:05.692198');
-INSERT INTO django_admin_log VALUES(12,'15','jj',2,'[{"changed": {"fields": ["Groups"]}}]',4,2,'2024-12-05 20:19:02.055008');
-INSERT INTO django_admin_log VALUES(13,'17','LKjj1',1,'[{"added": {}}]',4,2,'2024-12-05 21:08:01.991508');
-INSERT INTO django_admin_log VALUES(14,'17','LKjj1',2,'[{"changed": {"fields": ["Groups"]}}]',4,2,'2024-12-05 21:08:06.942186');
-INSERT INTO django_admin_log VALUES(15,'17','LKjj1',2,'[{"changed": {"fields": ["password"]}}]',4,2,'2024-12-05 21:08:37.033665');
-INSERT INTO django_admin_log VALUES(16,'17','LKjj1',2,'[{"changed": {"fields": ["Groups"]}}]',4,2,'2024-12-05 21:13:05.794522');
-INSERT INTO django_admin_log VALUES(17,'17','LKjj1',2,'[{"changed": {"fields": ["Groups"]}}]',4,2,'2024-12-05 21:17:01.897290');
-INSERT INTO django_admin_log VALUES(18,'17','LKjj1',2,'[]',4,2,'2024-12-05 21:17:23.596370');
-INSERT INTO django_admin_log VALUES(19,'18','supervisor1',1,'[{"added": {}}]',4,2,'2024-12-05 21:18:09.340339');
-INSERT INTO django_admin_log VALUES(20,'18','supervisor1',2,'[{"changed": {"fields": ["Groups"]}}]',4,2,'2024-12-05 21:18:13.415206');
-INSERT INTO django_admin_log VALUES(21,'19','supervisor2',3,'',4,2,'2024-12-11 15:20:14.879159');
-INSERT INTO django_admin_log VALUES(22,'4','pepe',3,'',4,2,'2024-12-12 14:26:08.646645');
-INSERT INTO django_admin_log VALUES(23,'22','Admin',1,'[{"added": {}}]',4,2,'2024-12-12 14:28:24.771906');
-INSERT INTO django_admin_log VALUES(24,'22','Admin',2,'[{"changed": {"fields": ["Staff status", "Superuser status", "Groups"]}}]',4,2,'2024-12-12 14:28:36.853795');
-INSERT INTO django_admin_log VALUES(29,'23','vendedor',2,'[{"changed": {"fields": ["Groups"]}}]',4,3,'2024-12-12 14:31:48.992333');
-INSERT INTO django_admin_log VALUES(30,'3','Admin',2,'[{"changed": {"fields": ["Username"]}}]',4,3,'2024-12-12 14:32:56.008723');
-INSERT INTO django_admin_log VALUES(31,'24','Supervisor',2,'[{"changed": {"fields": ["Groups"]}}]',4,3,'2024-12-12 14:35:41.854215');
-CREATE TABLE IF NOT EXISTS "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL);
-INSERT INTO django_session VALUES('di58xb3dvm0kgy11f0f5edml5bjuv7zi','.eJxVjDkOwjAUBe_iGlk_drxR0nOG6C8ODiBHipMKcXeIlALaNzPvpQbc1jJsLS_DJOqsjDr9boT8yHUHcsd6mzXPdV0m0ruiD9r0dZb8vBzu30HBVr41WeNdDIEJbG-BQ6QwjtiZPpnMo48QfUoRgRnE2x471wVyjkQ8QCL1_gDH5zdB:1tEAxe:y-af-OdcajQfNAhZgFXf5lielQ988tiA48VLo38uMZI','2024-12-05 17:27:22.605683');
-INSERT INTO django_session VALUES('23vl92nj207mhw3aaxdnp67a30fnjakn','.eJxVjDkOwjAUBe_iGlk_drxR0nOG6C8ODiBHipMKcXeIlALaNzPvpQbc1jJsLS_DJOqsjDr9boT8yHUHcsd6mzXPdV0m0ruiD9r0dZb8vBzu30HBVr41WeNdDIEJbG-BQ6QwjtiZPpnMo48QfUoRgRnE2x471wVyjkQ8QCL1_gDH5zdB:1tFkCw:zdonLPpBhW_w7Qi0HekNiqiFZLuAn00WmvXwWK3krNI','2024-12-10 01:17:38.111342');
-INSERT INTO django_session VALUES('t1pjnyubefcx5sdc0vibkplpzdvimlv0','.eJxVjMsOwiAQRf-FtSGl1IFx6b7fQJhhkKqBpI-V8d-1SRe6veec-1IhbmsJ2yJzmJK6qEGdfjeK_JC6g3SP9dY0t7rOE-ld0Qdd9NiSPK-H-3dQ4lK-NXdMntB4RJu9tSY7yCJMMYGJ3CV0hhxLhyQCQ0LgHuQM0luPAqjeHwMzOIg:1tIFkT:BVBPVVdQY5-falZnpkzYeRjTRnDrQvRYrViK2hK-jX4','2024-12-16 23:22:37.076211');
-INSERT INTO django_session VALUES('y73qz9rso4hre3un8okvcfzl6qtgvce4','.eJxVjMsOwiAQRf-FtSFAGQZduu83kOElVQNJaVfGf1eSLnR7zzn3xRztW3F7T6tbIruwiZ1-N0_hkeoA8U711nhodVsXz4fCD9r53GJ6Xg_376BQL6OWymu0CNFomLS0MqNEfxZWAxCBsSGDCEqRomQtIBJlQQm9-co-sfcHuEs3SA:1tJI3X:0OH8cBbkLcj4Zbux-tP3XFaFBc_-Pvfokw4ODLKBw-M','2024-12-19 20:02:35.201665');
-INSERT INTO django_session VALUES('3qy8vwfya1l6iuldruvrlew3jv2j2nt2','.eJxVjEEOwiAQAP_C2ZDCFhY8eu8bmi272KqhSWlPxr8bkh70OjOZtxrp2OfxqLKNC6urskZdfuFE6SmlGX5Qua86rWXflkm3RJ-26mFled3O9m8wU53bFywaAAjBsJcUJEnPGTrJLvpIiGaKHB1a7LJzhpBsjsH3HFIPIqg-X-22N5k:1tJKEe:XYsKK-phO6EuPkDeprZt7FVHY5jEV09z6Csx5VS5mZ8','2024-12-19 22:22:12.983464');
-INSERT INTO django_session VALUES('4yttu64v2t0vjgwonvn0qzlp5510q45q','.eJxVjDkOwjAUBe_iGlk_drxR0nOG6C8ODiBHipMKcXeIlALaNzPvpQbc1jJsLS_DJOqsjDr9boT8yHUHcsd6mzXPdV0m0ruiD9r0dZb8vBzu30HBVr41WeNdDIEJbG-BQ6QwjtiZPpnMo48QfUoRgRnE2x471wVyjkQ8QCL1_gDH5zdB:1tLOGq:46tmqa-lB8MZAFyOgE7iBrAJq0xvRhnf92M9HyARr20','2024-12-25 15:05:00.401734');
-INSERT INTO django_session VALUES('2m606txk0mxnc77vde2j7tm2xsz77chx','.eJxVjEEOwiAQRe_C2hBomQ64dO8ZyDCAVA0kpV0Z765NutDtf-_9l_C0rcVvPS1-juIsBiNOv2MgfqS6k3inemuSW12XOchdkQft8tpiel4O9--gUC_f2rJBnVAbO6lI1oCbMCuXDcMYwggDaQKdg8oIUSWVARwHdNkmRM0g3h_wWje6:1tLkYb:iJbgVimp5d5qKdu9lAfppKz0Vn1_3XupIBirsbp5Lxg','2024-12-26 14:52:49.309132');
-INSERT INTO django_session VALUES('8nyqs6uwwfjy8eeokcagv8pv42dk6m7t','.eJxVjEEOwiAQRe_C2hAGSqe4dO8ZyMAwUjVtUtqV8e7apAvd_vfef6lI21rj1soSR1ZnZZ06_Y6J8qNMO-E7TbdZ53lalzHpXdEHbfo6c3leDvfvoFKr3zoQZGH2VpwFgM4WEMOIfYeDDb4TTmwk9OBh8Jg9EqKEFJyxzpER9f4A9pE3TQ:1tLtK6:skVJTMR5Xp7YXznHCRoZ0W_8nVafvk8-ug4axQN-rhY','2024-12-27 00:14:26.083449');
-INSERT INTO django_session VALUES('5ps6x3vo2v6zxvuefiat4iy8k531me34','.eJxVjEEOwiAQRe_C2hAoTEGX7nsGwgyDVA1NSrsy3l1JutD83X8v7yVC3LcS9sZrmJO4CCNOvx9GenDtIN1jvS2SlrqtM8quyIM2OS2Jn9fD_QuU2ErPJvjOZLJ-zMqxdgmNIuMJzOAjDNYayqAJdERgQGRWyo5O6TNjzuL9AeeGOCU:1tMDnU:r-zO5FpEdJQsNSohGm0lDfSeDf1clYsDF2laaHA5ycI','2024-12-27 22:06:08.210752');
-CREATE TABLE IF NOT EXISTS "crud_producto" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "nombre" varchar(100) NOT NULL, "categoria" varchar(50) NOT NULL, "descripcion" text NULL, "stock" integer unsigned NOT NULL CHECK ("stock" >= 0), "precio" decimal NOT NULL, "fecha_vencimiento" date NULL);
-INSERT INTO crud_producto VALUES(15,'yogurtt','lacteos','yogurt en bolsa sabor fresa, 500ml',0,800,'2025-11-11');
-INSERT INTO crud_producto VALUES(19,'Queso','Lacteos','Queso Fundo Chanco',0,2000,'2024-11-11');
-INSERT INTO crud_producto VALUES(20,'Pan Molde','Carbohidratos','Pan BimBo',0,1500,'2024-12-24');
-CREATE TABLE IF NOT EXISTS "usuarios_customuser" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "username" varchar(150) NOT NULL UNIQUE, "first_name" varchar(150) NOT NULL, "last_name" varchar(150) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "role" varchar(10) NOT NULL);
-INSERT INTO usuarios_customuser VALUES(2,'pbkdf2_sha256$870000$UVH6mk7NobaOZLHrDMOebW$SS/L7xgm9IrX73DmP/KONgziy7l0A3sAxWQh/EqPaRE=','2024-12-12 14:27:09.196559',1,'root','','','root@gmail.com',1,1,'2024-11-21 17:27:07.718940','vendedor');
-INSERT INTO usuarios_customuser VALUES(3,'pbkdf2_sha256$870000$VbTUWT4IcczFI4BQ1X9hjk$E/f6S5iPLFSMS3EYnD2AZgNWhLxe07LuWkkIyK31GkU=','2024-12-13 22:06:08.206751',1,'Admin','','','Carl@gmail.com',1,1,'2024-11-27 01:28:54','admin');
-INSERT INTO usuarios_customuser VALUES(23,'pbkdf2_sha256$870000$LeJjPPeRszkZAITWvv0CwZ$QSejVprQZC8SvGJYRcHiGMB2oQoY0sIm+MI+/cOrFdo=','2024-12-13 22:05:57.152753',0,'vendedor','','','Vend@gmail.com',0,1,'2024-12-12 14:31:06','vendedor');
-INSERT INTO usuarios_customuser VALUES(24,'pbkdf2_sha256$870000$O0Ebo2X1C9wD4F3yHmV8qe$RIkq6CIzX0FA0EKr7QUtJZNr0+S7qHFm4V+wluKr2G0=','2024-12-13 22:05:45.431642',0,'Supervisor','','','supp@gmail.com',0,1,'2024-12-12 14:35:11','supervisor');
-DELETE FROM sqlite_sequence;
-INSERT INTO sqlite_sequence VALUES('django_migrations',23);
-INSERT INTO sqlite_sequence VALUES('django_content_type',8);
-INSERT INTO sqlite_sequence VALUES('auth_permission',32);
-INSERT INTO sqlite_sequence VALUES('auth_group',3);
-INSERT INTO sqlite_sequence VALUES('django_admin_log',31);
-INSERT INTO sqlite_sequence VALUES('crud_producto',20);
-INSERT INTO sqlite_sequence VALUES('usuarios_customuser',24);
-INSERT INTO sqlite_sequence VALUES('usuarios_customuser_user_permissions',12);
-INSERT INTO sqlite_sequence VALUES('usuarios_customuser_groups',14);
-CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
-CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
-CREATE INDEX "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
-CREATE INDEX "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
-CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
-CREATE INDEX "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
-CREATE UNIQUE INDEX "usuarios_customuser_groups_customuser_id_group_id_aace3972_uniq" ON "usuarios_customuser_groups" ("customuser_id", "group_id");
-CREATE INDEX "usuarios_customuser_groups_customuser_id_9e05d670" ON "usuarios_customuser_groups" ("customuser_id");
-CREATE INDEX "usuarios_customuser_groups_group_id_155d554c" ON "usuarios_customuser_groups" ("group_id");
-CREATE UNIQUE INDEX "usuarios_customuser_user_permissions_customuser_id_permission_id_8dac6e14_uniq" ON "usuarios_customuser_user_permissions" ("customuser_id", "permission_id");
-CREATE INDEX "usuarios_customuser_user_permissions_customuser_id_c016378e" ON "usuarios_customuser_user_permissions" ("customuser_id");
-CREATE INDEX "usuarios_customuser_user_permissions_permission_id_9a10b097" ON "usuarios_customuser_user_permissions" ("permission_id");
-CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
-CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
-CREATE INDEX "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
-COMMIT;
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.2
+-- Dumped by pg_dump version 17.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id bigint NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: crud_producto; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.crud_producto (
+    id bigint NOT NULL,
+    nombre character varying(100) NOT NULL,
+    categoria character varying(50) NOT NULL,
+    descripcion text,
+    stock bigint NOT NULL,
+    precio numeric(10,2) NOT NULL,
+    fecha_vencimiento date,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.crud_producto OWNER TO postgres;
+
+--
+-- Name: crud_producto_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.crud_producto_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.crud_producto_id_seq OWNER TO postgres;
+
+--
+-- Name: crud_producto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.crud_producto_id_seq OWNED BY public.crud_producto.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp(6) without time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag integer NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id bigint NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id bigint NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp(6) without time zone NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp(6) without time zone NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: usuarios_customuser; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuarios_customuser (
+    id bigint NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp(6) without time zone,
+    is_superuser smallint NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff smallint NOT NULL,
+    is_active smallint NOT NULL,
+    date_joined timestamp(6) without time zone NOT NULL,
+    role character varying(10) NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.usuarios_customuser OWNER TO postgres;
+
+--
+-- Name: usuarios_customuser_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuarios_customuser_groups (
+    id bigint NOT NULL,
+    customuser_id bigint NOT NULL,
+    group_id integer NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.usuarios_customuser_groups OWNER TO postgres;
+
+--
+-- Name: usuarios_customuser_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.usuarios_customuser_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.usuarios_customuser_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: usuarios_customuser_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.usuarios_customuser_groups_id_seq OWNED BY public.usuarios_customuser_groups.id;
+
+
+--
+-- Name: usuarios_customuser_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.usuarios_customuser_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.usuarios_customuser_id_seq OWNER TO postgres;
+
+--
+-- Name: usuarios_customuser_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.usuarios_customuser_id_seq OWNED BY public.usuarios_customuser.id;
+
+
+--
+-- Name: usuarios_customuser_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuarios_customuser_user_permissions (
+    id bigint NOT NULL,
+    customuser_id bigint NOT NULL,
+    permission_id integer NOT NULL,
+    trial146 character(1)
+);
+
+
+ALTER TABLE public.usuarios_customuser_user_permissions OWNER TO postgres;
+
+--
+-- Name: usuarios_customuser_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.usuarios_customuser_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.usuarios_customuser_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: usuarios_customuser_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.usuarios_customuser_user_permissions_id_seq OWNED BY public.usuarios_customuser_user_permissions.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: crud_producto id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.crud_producto ALTER COLUMN id SET DEFAULT nextval('public.crud_producto_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: usuarios_customuser id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser ALTER COLUMN id SET DEFAULT nextval('public.usuarios_customuser_id_seq'::regclass);
+
+
+--
+-- Name: usuarios_customuser_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser_groups ALTER COLUMN id SET DEFAULT nextval('public.usuarios_customuser_groups_id_seq'::regclass);
+
+
+--
+-- Name: usuarios_customuser_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.usuarios_customuser_user_permissions_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name, trial146) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id, trial146) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename, trial146) FROM stdin;
+1	Can add log entry	1	add_logentry	T
+2	Can change log entry	1	change_logentry	T
+3	Can delete log entry	1	delete_logentry	T
+4	Can view log entry	1	view_logentry	T
+5	Can add permission	2	add_permission	T
+6	Can change permission	2	change_permission	T
+7	Can delete permission	2	delete_permission	T
+8	Can view permission	2	view_permission	T
+9	Can add group	3	add_group	T
+10	Can change group	3	change_group	T
+11	Can delete group	3	delete_group	T
+12	Can view group	3	view_group	T
+13	Can add content type	4	add_contenttype	T
+14	Can change content type	4	change_contenttype	T
+15	Can delete content type	4	delete_contenttype	T
+16	Can view content type	4	view_contenttype	T
+17	Can add session	5	add_session	T
+18	Can change session	5	change_session	T
+19	Can delete session	5	delete_session	T
+20	Can view session	5	view_session	T
+21	Can add user	6	add_customuser	T
+22	Can change user	6	change_customuser	T
+23	Can delete user	6	delete_customuser	T
+24	Can view user	6	view_customuser	T
+25	Can add producto	7	add_producto	T
+26	Can change producto	7	change_producto	T
+27	Can delete producto	7	delete_producto	T
+28	Can view producto	7	view_producto	T
+\.
+
+
+--
+-- Data for Name: crud_producto; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.crud_producto (id, nombre, categoria, descripcion, stock, precio, fecha_vencimiento, trial146) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id, trial146) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model, trial146) FROM stdin;
+1	admin	logentry	T
+2	auth	permission	T
+3	auth	group	T
+4	contenttypes	contenttype	T
+5	sessions	session	T
+6	usuarios	customuser	T
+7	crud	producto	T
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied, trial146) FROM stdin;
+1	contenttypes	0001_initial	2024-12-13 23:27:02.206992	T
+2	contenttypes	0002_remove_content_type_name	2024-12-13 23:27:02.301991	T
+3	auth	0001_initial	2024-12-13 23:27:02.543993	T
+4	auth	0002_alter_permission_name_max_length	2024-12-13 23:27:02.598993	T
+5	auth	0003_alter_user_email_max_length	2024-12-13 23:27:02.605993	T
+6	auth	0004_alter_user_username_opts	2024-12-13 23:27:02.625992	T
+7	auth	0005_alter_user_last_login_null	2024-12-13 23:27:02.632993	T
+8	auth	0006_require_contenttypes_0002	2024-12-13 23:27:02.634992	T
+9	auth	0007_alter_validators_add_error_messages	2024-12-13 23:27:02.640993	T
+10	auth	0008_alter_user_username_max_length	2024-12-13 23:27:02.646992	T
+11	auth	0009_alter_user_last_name_max_length	2024-12-13 23:27:02.651993	T
+12	auth	0010_alter_group_name_max_length	2024-12-13 23:27:02.665991	T
+13	auth	0011_update_proxy_permissions	2024-12-13 23:27:02.671992	T
+14	auth	0012_alter_user_first_name_max_length	2024-12-13 23:27:02.678993	T
+15	usuarios	0001_initial	2024-12-13 23:27:03.065992	T
+16	admin	0001_initial	2024-12-13 23:27:03.196993	T
+17	admin	0002_logentry_remove_auto_add	2024-12-13 23:27:03.204993	T
+18	admin	0003_logentry_add_action_flag_choices	2024-12-13 23:27:03.212993	T
+19	crud	0001_initial	2024-12-13 23:27:03.251991	T
+20	sessions	0001_initial	2024-12-13 23:27:03.354992	T
+21	usuarios	0002_producto	2024-12-13 23:27:03.372992	T
+22	usuarios	0003_delete_producto	2024-12-13 23:27:03.386991	T
+23	usuarios	0004_alter_customuser_role	2024-12-13 23:27:03.454992	T
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date, trial146) FROM stdin;
+\.
+
+
+--
+-- Data for Name: usuarios_customuser; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.usuarios_customuser (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined, role, trial146) FROM stdin;
+\.
+
+
+--
+-- Data for Name: usuarios_customuser_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.usuarios_customuser_groups (id, customuser_id, group_id, trial146) FROM stdin;
+\.
+
+
+--
+-- Data for Name: usuarios_customuser_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.usuarios_customuser_user_permissions (id, customuser_id, permission_id, trial146) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 28, true);
+
+
+--
+-- Name: crud_producto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.crud_producto_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 7, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 23, true);
+
+
+--
+-- Name: usuarios_customuser_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.usuarios_customuser_groups_id_seq', 1, false);
+
+
+--
+-- Name: usuarios_customuser_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.usuarios_customuser_id_seq', 1, false);
+
+
+--
+-- Name: usuarios_customuser_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.usuarios_customuser_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_group pk_auth_group; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT pk_auth_group PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_permissions pk_auth_group_permissions; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT pk_auth_group_permissions PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission pk_auth_permission; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT pk_auth_permission PRIMARY KEY (id);
+
+
+--
+-- Name: crud_producto pk_crud_producto; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.crud_producto
+    ADD CONSTRAINT pk_crud_producto PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log pk_django_admin_log; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT pk_django_admin_log PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type pk_django_content_type; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT pk_django_content_type PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations pk_django_migrations; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT pk_django_migrations PRIMARY KEY (id);
+
+
+--
+-- Name: django_session pk_django_session; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT pk_django_session PRIMARY KEY (session_key);
+
+
+--
+-- Name: usuarios_customuser pk_usuarios_customuser; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser
+    ADD CONSTRAINT pk_usuarios_customuser PRIMARY KEY (id);
+
+
+--
+-- Name: usuarios_customuser_groups pk_usuarios_customuser_groups; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser_groups
+    ADD CONSTRAINT pk_usuarios_customuser_groups PRIMARY KEY (id);
+
+
+--
+-- Name: usuarios_customuser_user_permissions pk_usuarios_customuser_user_permissions; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser_user_permissions
+    ADD CONSTRAINT pk_usuarios_customuser_user_permissions PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX auth_group_permissions_group_id_permission_id_0cd325b0_uniq ON public.auth_group_permissions USING btree (group_id, permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_01ab375a_uniq; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX auth_permission_content_type_id_codename_01ab375a_uniq ON public.auth_permission USING btree (content_type_id, codename);
+
+
+--
+-- Name: django_content_type_app_label_model_76bd3d3b_uniq; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX django_content_type_app_label_model_76bd3d3b_uniq ON public.django_content_type USING btree (app_label, model);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: idx_name; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_name ON public.auth_group USING btree (name);
+
+
+--
+-- Name: idx_username; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_username ON public.usuarios_customuser USING btree (username);
+
+
+--
+-- Name: usuarios_customuser_groups_customuser_id_group_id_aace3972_uniq; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX usuarios_customuser_groups_customuser_id_group_id_aace3972_uniq ON public.usuarios_customuser_groups USING btree (customuser_id, group_id);
+
+
+--
+-- Name: usuarios_customuser_user_customuser_id_permission_8dac6e14_uniq; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX usuarios_customuser_user_customuser_id_permission_8dac6e14_uniq ON public.usuarios_customuser_user_permissions USING btree (customuser_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id);
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id);
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_usuarios_customuser_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_usuarios_customuser_id FOREIGN KEY (user_id) REFERENCES public.usuarios_customuser(id);
+
+
+--
+-- Name: usuarios_customuser_groups usuarios_customuser__customuser_id_9e05d670_fk_usuarios_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser_groups
+    ADD CONSTRAINT usuarios_customuser__customuser_id_9e05d670_fk_usuarios_ FOREIGN KEY (customuser_id) REFERENCES public.usuarios_customuser(id);
+
+
+--
+-- Name: usuarios_customuser_user_permissions usuarios_customuser__customuser_id_c016378e_fk_usuarios_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser_user_permissions
+    ADD CONSTRAINT usuarios_customuser__customuser_id_c016378e_fk_usuarios_ FOREIGN KEY (customuser_id) REFERENCES public.usuarios_customuser(id);
+
+
+--
+-- Name: usuarios_customuser_user_permissions usuarios_customuser__permission_id_9a10b097_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser_user_permissions
+    ADD CONSTRAINT usuarios_customuser__permission_id_9a10b097_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id);
+
+
+--
+-- Name: usuarios_customuser_groups usuarios_customuser_groups_group_id_155d554c_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_customuser_groups
+    ADD CONSTRAINT usuarios_customuser_groups_group_id_155d554c_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

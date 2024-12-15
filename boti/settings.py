@@ -16,6 +16,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 import pymysql
+import dj_database_url
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -94,20 +95,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'boti.wsgi.app'
 
 # Database
+
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', 'Botilleria'),
-        'USER': os.getenv('DB_USER', 'Admin'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'root1234'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '3306'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'BotilleriaMain',  # Nombre de la base de datos
+        'USER': 'postgres',  # Usuario
+        'PASSWORD': 'coraje123',  # Reemplaza con tu contraseña de Supabase
+        'HOST': 'localhost',  # Host
+        'PORT': '5432',  # Puerto
     }
 }
+DATABASES["default"] = dj_database_url.parse("postgresql://botilleria_db_user:bShHCdYypm1IqhK61UAbYaf7I8zrCVoD@dpg-ctf2sud2ng1s738gb4dg-a.frankfurt-postgres.render.com/botilleria_db")
 
-
+#postgresql://botilleria_db_user:bShHCdYypm1IqhK61UAbYaf7I8zrCVoD@dpg-ctf2sud2ng1s738gb4dg-a.frankfurt-postgres.render.com/botilleria_db
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
