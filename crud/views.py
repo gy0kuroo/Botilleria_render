@@ -6,6 +6,7 @@ from .models import Producto
 from .forms import ProductoForm
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth import logout
 
 class AdminDashboardView(RoleRequiredMixin, TemplateView):
     required_role = 'admin'
@@ -117,3 +118,8 @@ class DescontarStockView(RoleRequiredMixin, View):
         elif request.user.groups.filter(name='vendedor').exists():
             return redirect('vendedor_dashboard')
         return redirect('login')  # Fallback en caso de no tener rol válido
+
+class LogoutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('login') 

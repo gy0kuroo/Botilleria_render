@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import AdminDashboardView, VendedorDashboardView, SupervisorDashboardView, ProductoListView, ProductoCreateView, ProductoUpdateView, ProductoDeleteView,DescontarStockView
+from .views import AdminDashboardView, VendedorDashboardView, SupervisorDashboardView, ProductoListView, ProductoCreateView, ProductoUpdateView, ProductoDeleteView,DescontarStockView, LogoutView
 
 urlpatterns = [
     # Paneles
@@ -17,5 +17,6 @@ urlpatterns = [
 
     # Crear producto (sin cambios)
     path('nuevo/', ProductoCreateView.as_view(), name='producto_create'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('usuarios/', include('usuarios.urls')),
 ]

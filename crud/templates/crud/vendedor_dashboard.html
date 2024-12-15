@@ -55,4 +55,10 @@
         {% endfor %}
     </tbody>
 </table>
+<!-- Botón para cerrar sesión -->
+<form action="{% url 'logout' %}" method="get" style="display:inline;">
+    <button type="submit" class="btn btn-danger mt-4">
+        <i class="bi-box-arrow-right"></i> Cerrar sesión
+    </button>
+</form>
 {% endblock %}
