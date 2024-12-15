@@ -22,7 +22,7 @@ import dj_database_url
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', default = 'pollicacacacaca')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
@@ -157,7 +157,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'   
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #ojo piojo con esto                #Configuran el manejo de archivos multimedia subidos por usuarios.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #ojo piojo con                #Configuran el manejo de archivos multimedia subidos por usuarios.
 MEDIA_URL='/media/'  # esto hace referencia al espacio que se usara en la ur, el noticia/media
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 
