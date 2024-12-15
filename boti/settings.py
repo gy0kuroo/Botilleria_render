@@ -22,14 +22,15 @@ import dj_database_url
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gbilur8r=7pj8h1khk054+(ibz$qa+uroy=o+=r%&*#29^d^ld'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
-
-
+ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 # Application definition
 
 INSTALLED_APPS = [
@@ -153,7 +154,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
  
-STATIC_URL = '/static/'                     #Configuran el manejo de archivos multimedia subidos por usuarios.
+STATIC_URL = '/static/'   
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #ojo piojo con esto                #Configuran el manejo de archivos multimedia subidos por usuarios.
 MEDIA_URL='/media/'  # esto hace referencia al espacio que se usara en la ur, el noticia/media
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 
