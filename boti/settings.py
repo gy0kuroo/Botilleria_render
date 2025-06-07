@@ -99,18 +99,14 @@ WSGI_APPLICATION = 'boti.wsgi.app'
 
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 pymysql.install_as_MySQLdb()
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'BotilleriaMain',  # Nombre de la base de datos
-        'USER': 'postgres',  # Usuario
-        'PASSWORD': 'coraje123',  # Reemplaza con tu contraseña de Supabase
-        'HOST': 'localhost',  # Host
-        'PORT': '5432',  # Puerto
-    }
-}
-DATABASES["default"] = dj_database_url.parse("postgresql://botilleria_db_user:bShHCdYypm1IqhK61UAbYaf7I8zrCVoD@dpg-ctf2sud2ng1s738gb4dg-a.frankfurt-postgres.render.com/botilleria_db")
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default="postgresql://botilleria_db_user:bShHCdYypm1IqhK61UAbYaf7I8zrCVoD@dpg-ctf2sud2ng1s738gb4dg-a.frankfurt-postgres.render.com/botilleria_db",
+        conn_max_age=600,
+        ssl_require=True  # << OBLIGATORIO en Render
+    )
+}
 #postgresql://botilleria_db_user:bShHCdYypm1IqhK61UAbYaf7I8zrCVoD@dpg-ctf2sud2ng1s738gb4dg-a.frankfurt-postgres.render.com/botilleria_db
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
